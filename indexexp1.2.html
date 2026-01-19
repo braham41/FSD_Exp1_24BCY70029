@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Bank UI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f8ff;
+        }
+        div {
+            display: inline-block;
+            padding: 20px;
+            border: 2px solid #0000ff;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+        input, button {
+            padding: 8px;
+            margin: 5px;
+        }
+        #balance {
+            color: blue;
+            font-weight: bold;
+        }
+        #message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Bank UI</h2>
+        <h3>Balance: $<span id="balance">0</span></h3>
+
+        <input type="number" id="amount" placeholder="Enter amount">
+        <br>
+        <button onclick="deposit()">Deposit</button>
+        <button onclick="withdraw()">Withdraw</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let balance = 0;
+
+        function deposit() {
+            let amt = Number(document.getElementById('amount').value);
+            if (amt > 0) {
+                balance += amt;
+                document.getElementById('balance').innerText = balance;
+                document.getElementById('message').innerText = 'Deposited successfully!';
+            } else {
+                document.getElementById('message').innerText = 'Enter a valid amount!';
+            }
+            document.getElementById('amount').value = '';
+        }
+
+        function withdraw() {
+            let amt = Number(document.getElementById('amount').value);
+            if (amt > 0 && amt <= balance) {
+                balance -= amt;
+                document.getElementById('balance').innerText = balance;
+                document.getElementById('message').innerText = 'Withdrawn successfully!';
+            } else if (amt > balance) {
+                document.getElementById('message').innerText = 'Not enough balance!';
+            } else {
+                document.getElementById('message').innerText = 'Enter a valid amount!';
+            }
+            document.getElementById('amount').value = '';
+        }
+    </script>
+</body>
+</html>
